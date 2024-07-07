@@ -3,6 +3,7 @@ const excludeColumns = ['id', 'createdAt', 'updatedAt', 'UUID'];
 
 module.exports = class productsController {
     static async create(req, res) {
+        console.log(req.body);
         const { name, price, quantity, description } = req.body;
         if (!name) {
             return res
