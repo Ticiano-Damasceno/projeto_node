@@ -7,7 +7,8 @@ const cors = require('cors');
 const app = express();
 
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:5000' }));
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: 'http://localhost:5000', credentials: true }));
 
 app.get('/', (req, res) => {
     res.status(200).json({ message: 'Servidor OK' });

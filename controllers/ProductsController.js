@@ -44,12 +44,12 @@ module.exports = class productsController {
     }
 
     static async consultAll(req, res) {
-        const resultado = await Products.findAll({
+        const produtos = await Products.findAll({
             attributes: {
                 exclude: excludeColumns,
             },
         });
-        res.status(200).json({ resultado });
+        res.status(200).json({ produtos });
     }
 
     static async consultProduct(req, res) {
