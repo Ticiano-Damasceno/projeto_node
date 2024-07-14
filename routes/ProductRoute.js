@@ -9,4 +9,6 @@ route.post('/consult', productController.consultProduct);
 
 route.patch('/alter/:id', productController.updateProduct);
 
+route.delete('/delete/:uuid', productController.deleteProduct);
+
 module.exports = route;

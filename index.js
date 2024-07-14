@@ -1,8 +1,8 @@
 const express = require('express');
 const conn = require('./db');
-const productsRouter = require('./routes/ProductRoute');
-const Products = require('./models/Products');
 const cors = require('cors');
+const productsRouter = require('./routes/ProductRoute');
+const usersRouter = require('./routes/UsersRoute');
 
 const app = express();
 
@@ -15,6 +15,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/products', productsRouter);
+
+app.use('/user', usersRouter);
 
 conn.sync()
     .then(() => app.listen(3000))

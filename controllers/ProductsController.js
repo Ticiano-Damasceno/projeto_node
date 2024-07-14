@@ -44,11 +44,14 @@ module.exports = class productsController {
     }
 
     static async consultAll(req, res) {
-        const produtos = await Products.findAll({
-            attributes: {
-                exclude: excludeColumns,
-            },
-        });
+        const produtos = await Products
+            .findAll
+            //     {
+            //     attributes: {
+            //         exclude: excludeColumns,
+            //     },
+            // }
+            ();
         res.status(200).json({ produtos });
     }
 
@@ -108,6 +111,25 @@ module.exports = class productsController {
             });
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    static async deleteProduct(req, res) {
+        const uuid = req.params.uuid;
+        const verifyProduct = Products.findOne({ where: { UUID: uuid } });
+
+        if (!verifyProduct) {
+            return res.status(404).json({ message: 'Produto não existe.' });
+        }
+
+        try {
+            await Products.destroy({ where: { UUID: uuid } });
+            return res.status(200);
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(500)
+                .json({ message: 'Erro na conexão com o servidor.' });
         }
     }
 };
